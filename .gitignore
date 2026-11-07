@@ -10,3 +10,8 @@ venv/
 *.log
 .DS_Store
 Thumbs.db
+
+# Named student/tutor profiles and interaction records stay local.
+data/StudentProfile.csv
+data/TutorCourse.csv
+data/InteractionDataset.csv
