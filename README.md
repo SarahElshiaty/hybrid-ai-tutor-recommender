@@ -11,7 +11,7 @@ A tutor recommendation prototype that combines profile-based matching rules with
 2. Groups education types into five broad categories for matching.
 3. Uses soft matching rules to identify and score tutor candidates.
 4. Trains a matrix-factorization model (Surprise SVD) on student–tutor ratings.
-5. Combines candidate scores and predicted ratings to rank recommendations.
+5. Uses rule-based match scores with predicted ratings to rank candidate tutors; the Gradio interface sorts primarily by match score.
 6. Examines top-five recommendation metrics, catalog coverage and exposure by tutor popularity.
 
 The interface is a **Gradio prototype**, not a deployed tutoring marketplace.
@@ -28,7 +28,7 @@ The original project reports the following figures from its strict evaluation:
 | Catalog coverage | 85.35% |
 | Exposure to less-popular tutors | 63.84% |
 
-These are results **reported by the project**, not independently reproduced benchmarks. Exposure by popularity is a descriptive distribution measure; it does not establish demographic fairness or unbiased recommendations. The datasets and experimental evaluation setup should be reviewed before comparing these figures with other recommenders.
+These figures are **reported in the original project**, not independently reproduced. The Precision@5, Recall@5 and NDCG@5 values are computed from SVD test-set predictions, so they **do not establish end-to-end hybrid recommendation performance**. Catalog coverage and less-popular tutor exposure are also measured from SVD prediction rankings. Popularity exposure is a descriptive measure, not proof of demographic fairness.
 
 ## Repository contents
 
@@ -46,7 +46,7 @@ The project was originally developed in Google Colab. A separate script under `s
 
 1. Install Python and create a virtual environment.
 2. Install the [requirements](requirements.txt): `python -m pip install -r requirements.txt`.
-3. Ensure these files are present in `data/`: `StudentProfile.csv`, `TutorCourse.csv`, `InteractionDataset.csv` and `CurriculumSubject.csv`. See [data instructions](data/README.md).
+3. The included `CurriculumSubject.csv` contains curriculum reference information. The other three CSVs contain named profiles and interactions and are not redistributed here. If you have permission to use the original data for local academic work, run `python scripts/fetch_data.py` to retrieve checksum-verified copies. See [data instructions](data/README.md).
 4. Run `python src/recommender.py` to execute the experiment and launch the Gradio interface.
 
 Some combinations of Python, NumPy, Surprise and Gradio may require compatible package versions. **The full training and interface flow has not been independently rerun in a clean environment**, so these are setup instructions rather than a passing end-to-end test.
