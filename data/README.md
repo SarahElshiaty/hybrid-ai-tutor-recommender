@@ -1,12 +1,16 @@
-# Datasets
+# Project datasets
 
-The academic project uses four CSV datasets:
+The original project uses four related CSV datasets.
 
-- [StudentProfile.csv](https://github.com/M1sh13l/AI-Tutor-Recommendation-System/blob/main/data/StudentProfile.csv)
-- [TutorCourse.csv](https://github.com/M1sh13l/AI-Tutor-Recommendation-System/blob/main/data/TutorCourse.csv)
-- [InteractionDataset.csv](https://github.com/M1sh13l/AI-Tutor-Recommendation-System/blob/main/data/InteractionDataset.csv)
-- [CurriculumSubject.csv](https://github.com/M1sh13l/AI-Tutor-Recommendation-System/blob/main/data/CurriculumSubject.csv)
+| File | Purpose | Distribution |
+| --- | --- | --- |
+| `CurriculumSubject.csv` | Curriculum and subject reference data | Included here |
+| `StudentProfile.csv` | Student preferences and characteristics | Download locally |
+| `TutorCourse.csv` | Tutor profiles and course information | Download locally |
+| `InteractionDataset.csv` | Historical tutor ratings and interactions | Download locally |
 
-The original files are available in the [team repository](https://github.com/M1sh13l/AI-Tutor-Recommendation-System/tree/main/data).
+The three profile and interaction files contain **names and student-related attributes**. Their provenance and permission for redistribution are not documented in the original repository. This standalone repository does not duplicate them.
 
-**Status:** The repository's local-data restoration is in progress. If the CSV files are not visible in this directory, obtain them from the original repository and place them here before running `src/recommender.py`. We have not independently verified that every profile in the original datasets is synthetic or cleared for public redistribution; review their contents and usage rights before deployment or publication.
+If you are authorized to use the original data for academic research, run `python scripts/fetch_data.py` from the repository root. The script downloads the original files from the [team repository](https://github.com/M1sh13l/AI-Tutor-Recommendation-System/tree/main/data), verifies their Git blob checksums, and leaves them untracked locally.
+
+Do not publish the profiles or deploy them in a public demo unless the dataset's provenance and rights have been established.
