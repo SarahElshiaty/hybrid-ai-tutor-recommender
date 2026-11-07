@@ -1,0 +1,33 @@
+name: Python source check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Validate Python syntax
+        run: python -m py_compile src/recommender.py
+      - name: Check source references
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          app = Path("src/recommender.py").read_text(encoding="utf-8")
+          assert "from google.colab import drive" not in app
+          assert "drive.mount(" not in app
+          assert "!pip" not in app
+          assert 'Path(__file__).resolve().parents[1] / "data"' in app
+          assert Path("data/CurriculumSubject.csv").exists()
+          print("Source validation passed")
+          PY
